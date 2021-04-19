@@ -6,7 +6,7 @@ const express = require('express');
 // Call the function to create a new express app (instance)
 const app = express();
 
-// costumize the server
+// costumize the server - static (pages that are never going to change)
 const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.static(publicDirectoryPath));
 
