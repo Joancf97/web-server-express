@@ -5,10 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css" >
-  <title>Help page</title>
+  <script src="js/app.js"></script>
+  <title>About page</title>
 </head>
 <body>
-  <h1> {{title}}</h1>
-  <p> {{phrase}} </p>
+  {{>header}}
+  <img src="img/cowboy.JPG">
+  <p> {{name}}</p>
+  {{>footer}}
 </body>
 </html>
