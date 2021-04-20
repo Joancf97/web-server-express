@@ -5,10 +5,37 @@ const express = require('express');
 
 // Call the function to create a new express app (instance)
 const app = express();
+// Paths  for express config
+const publicDirectoryPath = path.join(__dirname, '../public');
+const viewsPath = path.join(__dirname, '../templates');
 
+// Handlebars - ingect dinamic values into the html
+app.set('view engine', 'hbs');
+app.set('views', viewsPath);
 // costumize the server - static (pages that are never going to change)
-const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.static(publicDirectoryPath));
+
+// Render home view
+app.get('', (req, res) => {
+  res.render('index', { 
+    title: "Weather",
+    name: "Jose Andres"
+  });
+});
+
+app.get('/about', (req, res) => {
+  res.render('about', { 
+    title: "about page",
+    name: "Jose Andres"
+  });
+});
+
+app.get('/help', (req, res) => {
+  res.render('help', { 
+    title: "help page",
+    phrase: "What's your question?"
+  });
+});
 
 // weather
 app.get('/weather', (req, res) => {
