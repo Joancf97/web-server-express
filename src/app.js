@@ -29,14 +29,14 @@ app.get('', (req, res) => {
 
 app.get('/about', (req, res) => {
   res.render('about', { 
-    header: "about page",
+    header: "About Page",
     author: "Jose Andres"
   });
 });
 
 app.get('/help', (req, res) => {
   res.render('help', { 
-    header: "help page",
+    header: "Help Page",
     phrase: "What's your question?",
     author: "Jose Andres"
   });
@@ -45,6 +45,7 @@ app.get('/help', (req, res) => {
 // weather
 app.get('/weather', (req, res) => {
   res.send({
+    header: "Weather Page",
     location: "Philadelphia",
     forecast: "It currently 15 degrees Celcius",
     author: "Jose Andres"
