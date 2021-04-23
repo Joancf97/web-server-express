@@ -1,13 +1,22 @@
-console.log('client side javascript code');
+const wetaherForm = document.querySelector('form');
+const search = document.querySelector('input');
+const message1 = document.getElementById('m1');
+const message2 = document.getElementById('m2');
 
-//  Fetch api from the client side
-fetch('http://localhost:3000/weather?address=Guatemala').then((response) => {
-  response.json().then((data) => {
-    if(data.error){ 
-      console.log(data.error);
-    } else { 
-      console.log(data.location);
-      console.log(data.forecast);
-    }
+
+wetaherForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent page to reload
+  //  Fetch api from the client side
+  const location = search.value
+  fetch('http://localhost:3000/weather?address='+location).then((response) => {
+    response.json().then((data) => {
+      if(data.error){ 
+        message1.textContent = data.error;
+      } else { 
+        message1.textContent = "Country: " + data.location;
+        message2.textContent = "Forecast: " + data.forecast;
+      }
+    });
   });
+
 });

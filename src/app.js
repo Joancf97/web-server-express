@@ -27,7 +27,8 @@ app.use(express.static(publicDirectoryPath));
 app.get('', (req, res) => {
   res.render('index', { 
     header: "home page",
-    author: "Jose Andres"
+    author: "Jose Andres",
+    instructions: "Insert the location"
   });
 });
 
