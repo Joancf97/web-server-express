@@ -3,6 +3,10 @@ const path = require('path');
 // Funciton of express
 const express = require('express');
 const hbs = require ('hbs');
+// Utils functions
+const forecast = require('../utils/forecast');
+const geocode = require('../utils/geocode');
+
 
 // Call the function to create a new express app (instance)
 const app = express();
@@ -27,6 +31,7 @@ app.get('', (req, res) => {
   });
 });
 
+// About secction
 app.get('/about', (req, res) => {
   res.render('about', { 
     header: "About Page",
@@ -34,6 +39,7 @@ app.get('/about', (req, res) => {
   });
 });
 
+// Help secction
 app.get('/help', (req, res) => {
   res.render('help', { 
     header: "Help Page",
@@ -44,11 +50,27 @@ app.get('/help', (req, res) => {
 
 // weather
 app.get('/weather', (req, res) => {
-  res.send({
-    header: "Weather Page",
-    location: "Philadelphia",
-    forecast: "It currently 15 degrees Celcius",
-    author: "Jose Andres"
+  if(!req.query.address){   // Validation
+    return res.send({
+      error: "Must provide a location"
+    })
+  }
+  // Request the info 
+  geocode(req.query.address, (error, data) => {
+    if(error){
+      return console.log(error);
+    }
+    forecast(data.latitud, data.longitud, (error, forecastData) =>{
+      if(error){
+        return console.log(error);
+      }
+      res.send({
+        header: "Weather Page",
+        location: req.query.address,
+        forecast: 'The weather in ' + data.location + ' is ' + forecastData,
+        author: "Jose Andres"
+      });
+    });
   });
 });
 
