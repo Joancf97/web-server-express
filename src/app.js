@@ -26,7 +26,7 @@ app.use(express.static(publicDirectoryPath));
 // Render home view
 app.get('', (req, res) => {
   res.render('index', { 
-    header: "home page",
+    header: "Weather page",
     author: "Jose Andres",
     instructions: "Insert the location"
   });
